@@ -1,13 +1,47 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>WpTest</title>
-  <base href="/">
+  <title>Test angular-elements</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
-  <app-root></app-root>
+  <stepper-element></stepper-element>
+  <root-element id="myElement" text="Initial Text"></root-element>
+  <about-element></about-element>
+  <contact-element></contact-element>
+  <contact-material-element></contact-material-element>
+
+  <button id="myButton" onclick="myElement"></button>
+
+  <script>
+    addEventListener("DOMContentLoaded", (event) => {
+      const element = document.getElementById('myElement');
+      element.text = "xxxxxx";
+      const angularElement = element.ngElementStrategy.componentRef.instance;
+
+
+      // Listen to `textChanged` event
+      element.addEventListener('textChanged', function (event) {
+        console.log('Text has changed:', event.detail);
+      });
+
+      // Call `setText` method to change text
+      setTimeout(() => {
+
+        angularElement.setText('Text set from outside');
+        console.log(angularElement);
+        angularElement.textChanged.emit("asdasdsad");
+
+
+      }, 3000);
+    });
+  </script>
 </body>
+
 </html>
